@@ -34,6 +34,16 @@ class Searcher:
         self.__winesByRegion = winesByRegion
         self.__winesByType = winesByType
 
+    def getRegions(self):
+        regions = list(self.__winesByRegion.keys())
+        regions.sort()
+        return regions
+
+    def getTypes(self):
+        types = list(self.__winesByType.keys())
+        types.sort()
+        return types
+
     def searchRandomByRegion(self, region):
         if region not in self.__winesByRegion:
             return None
