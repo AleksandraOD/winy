@@ -1,15 +1,17 @@
+import shutil
+
 import pymongo
 import requests
-import ssl
-import shutil
 
 url = 'mongodb://localhost:27017/wines'
 mongoClient = pymongo.MongoClient(url)
 winesDB = mongoClient['wines']
 winesCol = winesDB['wines']
 
+
 def mkFileName(wineID):
     return 'images/' + wineID + '.jpg'
+
 
 def downloadImage(url, fileName):
     r = requests.get(url, stream=True)
@@ -17,6 +19,7 @@ def downloadImage(url, fileName):
         with open(fileName, 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
+
 
 def downloadImages():
     global winesCol

@@ -1,13 +1,15 @@
 import tkinter
 import tkinter.messagebox
-from PIL import Image, ImageTk
-from winesSearcher import Searcher
 from pathlib import Path
+
+from PIL import ImageTk
+
+from winesSearcher import Searcher
 
 searcher = Searcher()
 
 mainWindow = tkinter.Tk()
-mainWindow.title("Wine")
+mainWindow.title("Wine? Yes!!")
 
 infoContainer = tkinter.PanedWindow
 
@@ -25,6 +27,7 @@ def changeInfo(wine):
             txt += '\n'
     global lblInfo
     lblInfo['text'] = txt
+
 
 def changeImage(wine):
     # меняем картинку
@@ -46,7 +49,6 @@ def showInformation(wine):
     changeImage(wine)
 
 
-
 def searchWineByRegion():
     global searcher
     regionName = lbRegions.get(tkinter.ACTIVE)
@@ -62,10 +64,11 @@ def searchWineByType():
 
 
 def createListBox(wind, listOfEls):
-    lbRegions = tkinter.Listbox(wind)
+    lbRegions = tkinter.Listbox(wind, width=50, height=25, bg='MistyRose2')
     for item in listOfEls:
         lbRegions.insert(tkinter.END, item)
     return lbRegions
+
 
 regions = searcher.getRegions()
 lbRegions = createListBox(mainWindow, regions)
@@ -75,24 +78,24 @@ grapeTypes = searcher.getTypes()
 lbGrapeTypes = createListBox(mainWindow, grapeTypes)
 lbGrapeTypes.grid(row=0, column=1)
 
-
-btnSearchByRegion = tkinter.Button(mainWindow, text="Найти вино по региону", command=searchWineByRegion)
+btnSearchByRegion = tkinter.Button(mainWindow, text="Найти вино по региону",
+                                   command=searchWineByRegion,
+                                   fg='indian red')
 btnSearchByRegion.grid(row=1, column=0)
-btnSearchByType = tkinter.Button(mainWindow, text="Найти вино по сорту", command=searchWineByType)
+btnSearchByType = tkinter.Button(mainWindow, text="Найти вино по сорту",
+                                 command=searchWineByType,
+                                 fg='indian red')
 btnSearchByType.grid(row=1, column=1)
-
-
 
 # Картинка
 img = ImageTk.PhotoImage(file="empty.jpg")
-cv = tkinter.Canvas(mainWindow, width=70, height=300)
+cv = tkinter.Canvas(mainWindow, width=200, height=350)
 cv.grid(row=2, column=0)
 cv2 = cv.create_image(0, 0, image=img, anchor='nw')
 
 # Информация о выбранном вине
 lblInfo = tkinter.Label(mainWindow)
 lblInfo.grid(row=2, column=1)
-
 
 # tbRegion = tkinter.Text(mainWindow)
 

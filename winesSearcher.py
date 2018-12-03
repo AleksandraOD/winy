@@ -1,5 +1,6 @@
-import pymongo
 from random import randint
+
+import pymongo
 
 
 class Searcher:

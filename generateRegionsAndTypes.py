@@ -8,6 +8,7 @@ winesCol = winesDB['wines']
 regionsCol = winesDB['regions']
 grapesTypesCol = winesDB['grapesTypes']
 
+
 def getElements(nameOfElement):
     global winesCol
     els = []
@@ -22,19 +23,23 @@ def getElements(nameOfElement):
                 els.append(el)
     return els
 
+
 def addElementsToDB(elements, colName):
     for el in elements:
         colName.insert_one({"name": el})
+
 
 def genRegions():
     global regionsCol
     regions = getElements('Регион:')
     addElementsToDB(regions, regionsCol)
 
+
 def genGrapesTypes():
     global grapesTypesCol
     grapesTypes = getElements('Сорт винограда:')
     addElementsToDB(grapesTypes, grapesTypesCol)
+
 
 genRegions()
 genGrapesTypes()
